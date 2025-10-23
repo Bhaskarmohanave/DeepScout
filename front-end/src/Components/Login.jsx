@@ -39,7 +39,8 @@ function Login() {
     try{
       const res = await fetch("https://automatic-eureka-j69j57jwqjwfp6xj-3000.app.github.dev/login",{
         method: "POST",
-        headers: {}
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({userName,password})
       })
       
     }catch(err){}
