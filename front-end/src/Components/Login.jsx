@@ -7,7 +7,7 @@ function Login() {
   const [emptyUN, setUNError] = useState("");
   const [emptyPass, setPassError] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     let hasError = false;
 
@@ -35,6 +35,15 @@ function Login() {
     if (hasError) {
       return;
     }
+
+    try{
+      const res = await fetch("https://automatic-eureka-j69j57jwqjwfp6xj-3000.app.github.dev/login",{
+        method: "POST",
+        headers: {}
+      })
+      
+    }catch(err){}
+
     console.log(userName);
     console.log(password);
   }
