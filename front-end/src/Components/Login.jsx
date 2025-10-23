@@ -9,6 +9,7 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    let hasError = false;
 
     // if (!userName.trim() || !password.trim()) {
     // //   alert("Enter details");
@@ -17,17 +18,25 @@ function Login() {
     //   setUserName("");
     //   return;
     // }
-
-    if (!userName.trim()){
-        setUNError("UserName cannot be empty")
+    if (!userName.trim() && !password.trim()) {
+      setPassError("Password cannot be empty");
+      setUNError("UserName cannot be empty");
+      return;
+    }
+    if (!userName.trim()) {
+      setUNError("UserName cannot be empty");
+      hasError = true;
+    } 
+    if (!password.trim()) {
+      setPassError("Password cannot be empty");
+      hasError = true;
     }
 
-    if (!emptyPass){
-        setPassError("Password cannot be empty")
-        
+    if (hasError) {
+      return;
     }
-    console.log(userName)
-    console.log(password)
+    console.log(userName);
+    console.log(password);
   }
 
   return (
@@ -40,11 +49,12 @@ function Login() {
           type="text"
           placeholder="Enter User Name"
           value={userName}
-          onChange={(e) => {setUserName(e.target.value);
-            setUNError("")
+          onChange={(e) => {
+            setUserName(e.target.value);
+            setUNError("");
           }}
         />
-        <p style={{color:'red'}}>{!emptyUN ? "" : emptyUN}</p>
+        <p style={{ color: "red" }}>{emptyUN}</p>
 
         <label htmlFor="password">Password:</label>
         <input
@@ -56,9 +66,8 @@ function Login() {
             setPassword(e.target.value);
             setPassError("");
           }}
-          
         />
-        <p style={{color:'red'}}>{!emptyPass ? "" : emptyPass}</p>
+        <p style={{ color: "red" }}>{emptyPass}</p>
 
         <button type="submit">Submit</button>
       </form>
