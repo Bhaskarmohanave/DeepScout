@@ -1,4 +1,4 @@
-// import React from "react";
+import {useNavigate} from "react-router-dom";
 import { useState } from "react";
 
 function Login() {
@@ -6,7 +6,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [emptyUN, setUNError] = useState("");
   const [emptyPass, setPassError] = useState("");
-
+  const navigate  = useNavigate()
   async function handleSubmit(e) {
     e.preventDefault();
     let hasError = false;
@@ -45,8 +45,16 @@ function Login() {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({userName,password})
       })
-      const data =await res.json()
+      const data = await res.json()
       console.log(data)
+
+      if (!data.success){
+        navigate("/")
+      }
+
+      if (data.success){
+        navigate("./Dashboard" ,{ state: { userName: data.user } });
+      }
     }catch(err){}
 
   }
