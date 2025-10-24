@@ -16,6 +16,14 @@ app.get("/", (req,res) => {
 
 app.post("/login", (req,res) => {
     console.log(req.body)
+    const { username, password} = req.body;
+
+    const user = users.find((u) => u.username === username && u.password === password)
+    
+    if (user){
+        res.json({success:true, message:"hello", username:user.username})
+    }
+    
 })
 
 app.listen(3000, () => console.log("Server Running"))

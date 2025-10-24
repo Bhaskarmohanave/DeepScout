@@ -35,18 +35,20 @@ function Login() {
     if (hasError) {
       return;
     }
-
+    setUserName("")
+    setPassword("")
+    console.log(userName);
+    console.log(password);
     try{
       const res = await fetch("https://automatic-eureka-j69j57jwqjwfp6xj-3000.app.github.dev/login",{
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({userName,password})
       })
-      
+      const data =await res.json()
+      console.log(data)
     }catch(err){}
 
-    console.log(userName);
-    console.log(password);
   }
 
   return (
