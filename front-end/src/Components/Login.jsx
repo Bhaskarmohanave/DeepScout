@@ -40,9 +40,12 @@ function Login() {
     console.log(userName);
     console.log(password);
     try{
+      
       const res = await fetch("https://automatic-eureka-j69j57jwqjwfp6xj-3000.app.github.dev/login",{
         method: "POST",
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({userName,password})
       })
       const data = await res.json()
@@ -53,7 +56,9 @@ function Login() {
       }
 
       if (data.success){
-        navigate("./Dashboard" ,{ state: { userName: data.user } });
+        localStorage.setItem("token", data.token)
+        // const token = localStorage.getItem("token")
+        navigate("./dashboard" ,{ state: { userName: data.user } });
       }
     }catch(err){}
 
